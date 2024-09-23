@@ -18,8 +18,14 @@ with open(prompt_guide_path, "r") as f:
     PromptGuide = f.read()
 
 region_name = os.getenv("REGION_NAME")
+aws_access_key_id = os.getenv("AWS_ACCESS_KEY_ID")
+aws_secret_access_key = os.getenv("AWS_SECRET_ACCESS_KEY")
 
-session = boto3.Session()
+session = boto3.Session(
+    aws_access_key_id=aws_access_key_id,
+    aws_secret_access_key=aws_secret_access_key,
+    region_name=region_name
+)
 retry_config = Config(
     region_name=region_name,
     retries={
